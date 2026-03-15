@@ -1,0 +1,10 @@
+services:
+  db:
+    image: mysql:9.6.0-oracle
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin12345
+      MYSQL_DATABASE: db_luflix
+      MYSQL_USER: luflix_user
+      MYSQL_PASSWORD: password

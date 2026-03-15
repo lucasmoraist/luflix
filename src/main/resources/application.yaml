@@ -1,3 +1,20 @@
 spring:
   application:
     name: luflix
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_luflix?allowPublicKeyRetrieval=true
+    username: luflix_user
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
