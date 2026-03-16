@@ -2,6 +2,7 @@ package com.lucasmoraist.luflix.application.usecases.videos;
 
 import com.lucasmoraist.luflix.infrastructure.database.entity.VideoEntity;
 import com.lucasmoraist.luflix.infrastructure.database.persistence.VideoPersistence;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +19,10 @@ public class DeleteVideoCase {
     public void execute(Long videoId) {
         log.info("Deleting video with id: {}", videoId);
         VideoEntity videoEntity = videoPersistence.findById(videoId)
-                .orElseThrow(() -> new RuntimeException("Video not found with id: " + videoId));
+                .orElseThrow(() -> {
+                    log.warn("Video not found with id: {}", videoId);
+                    return new EntityNotFoundException("Video not found with id: " + videoId);
+                });
         videoPersistence.deleteById(videoEntity);
     }
 
