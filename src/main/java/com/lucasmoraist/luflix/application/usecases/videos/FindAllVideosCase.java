@@ -26,7 +26,7 @@ public class FindAllVideosCase {
         List<VideoEntity> entities = this.videoPersistence.findAll();
         List<FindAllVideoResponse> videos = entities
                 .stream()
-                .map(FindAllVideoResponse::toEntity)
+                .map(FindAllVideoResponse::toResponse)
                 .toList();
 
         return new PageImpl<>(videos, PageRequest.of(page, size), entities.size());

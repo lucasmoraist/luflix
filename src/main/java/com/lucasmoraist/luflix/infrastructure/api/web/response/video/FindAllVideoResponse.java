@@ -8,7 +8,7 @@ public record FindAllVideoResponse(
         String url
 ) {
 
-    public static FindAllVideoResponse toEntity(VideoEntity entity) {
+    public static FindAllVideoResponse toResponse(VideoEntity entity) {
         return new FindAllVideoResponse(
                 entity.getId(),
                 entity.getTitle(),
