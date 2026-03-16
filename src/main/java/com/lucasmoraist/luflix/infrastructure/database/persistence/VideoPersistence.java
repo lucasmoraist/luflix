@@ -18,7 +18,7 @@ public class VideoPersistence {
         this.videoRepository = videoRepository;
     }
 
-    public void deleteById(VideoEntity videoEntity) {
+    public void delete(VideoEntity videoEntity) {
         this.videoRepository.delete(videoEntity);
     }
 

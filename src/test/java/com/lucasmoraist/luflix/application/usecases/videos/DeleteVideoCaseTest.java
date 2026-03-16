@@ -38,7 +38,7 @@ class DeleteVideoCaseTest {
         deleteVideoCase.execute(videoId);
 
         verify(videoPersistence, times(1)).findById(videoId);
-        verify(videoPersistence, times(1)).deleteById(any());
+        verify(videoPersistence, times(1)).delete(any());
     }
 
     @Test
@@ -46,7 +46,7 @@ class DeleteVideoCaseTest {
     void case02() {
         Long videoId = 1L;
 
-        when(videoPersistence.findById(any())).thenThrow(EntityNotFoundException.class);
+        when(videoPersistence.findById(any())).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> deleteVideoCase.execute(videoId));
 

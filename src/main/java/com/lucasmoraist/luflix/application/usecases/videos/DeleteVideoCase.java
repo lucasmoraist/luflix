@@ -23,7 +23,7 @@ public class DeleteVideoCase {
                     log.warn("Video not found with id: {}", videoId);
                     return new EntityNotFoundException("Video not found with id: " + videoId);
                 });
-        videoPersistence.deleteById(videoEntity);
+        videoPersistence.delete(videoEntity);
     }
 
 }
