@@ -1,6 +1,7 @@
 package com.lucasmoraist.luflix.infrastructure.database.entity;
 
 import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -29,7 +30,7 @@ public class VideoEntity {
     private String description;
     private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "fk_video_category"))
     private CategoryEntity category;
 
@@ -37,6 +38,7 @@ public class VideoEntity {
         if (request.title() != null) this.title = request.title();
         if (request.description() != null) this.description = request.description();
         if (request.url() != null) this.url = request.url();
+        if (request.category() != null) this.category = CategoryEntity.toEntity(request.category());
     }
 
 }
