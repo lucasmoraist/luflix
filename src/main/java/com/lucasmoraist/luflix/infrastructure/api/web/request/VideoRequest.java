@@ -10,7 +10,8 @@ public record VideoRequest(
         String description,
         @NotBlank(message = "URL is required")
         @Size(max = 500, message = "URL must be at most 500 characters")
-        String url
+        String url,
+        CategoryRequest category
 ) {
 
 }

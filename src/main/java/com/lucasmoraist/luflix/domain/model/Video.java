@@ -16,7 +16,9 @@ public record Video(
                 videoEntity.getTitle(),
                 videoEntity.getDescription(),
                 videoEntity.getUrl(),
-                Category.toDomain(videoEntity.getCategory())
+                videoEntity.getCategory() != null
+                        ? Category.toDomain(videoEntity.getCategory())
+                        : null
         );
     }
 
