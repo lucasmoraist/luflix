@@ -6,7 +6,8 @@ public record Video(
         Long id,
         String title,
         String description,
-        String url
+        String url,
+        Category category
 ) {
 
     public static Video toDomain(VideoEntity videoEntity) {
@@ -14,7 +15,8 @@ public record Video(
                 videoEntity.getId(),
                 videoEntity.getTitle(),
                 videoEntity.getDescription(),
-                videoEntity.getUrl()
+                videoEntity.getUrl(),
+                Category.toDomain(videoEntity.getCategory())
         );
     }
 
