@@ -4,9 +4,11 @@ import com.lucasmoraist.luflix.application.usecases.category.CreateCategoryCase;
 import com.lucasmoraist.luflix.application.usecases.category.DeleteCategoryCase;
 import com.lucasmoraist.luflix.application.usecases.category.FindAllCategoriesCase;
 import com.lucasmoraist.luflix.application.usecases.category.FindCategoryByIdCase;
+import com.lucasmoraist.luflix.application.usecases.category.FindVideoByCategoryIdCase;
 import com.lucasmoraist.luflix.application.usecases.category.UpdateCategoryCase;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
+import com.lucasmoraist.luflix.infrastructure.api.web.response.category.VideoByCategoryResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,6 +35,7 @@ public class CategoryController {
     private final CreateCategoryCase createCategoryCase;
     private final UpdateCategoryCase updateCategoryCase;
     private final DeleteCategoryCase deleteCategoryCase;
+    private final FindVideoByCategoryIdCase findVideoByCategoryIdCase;
 
     @GetMapping
     public ResponseEntity<Page<Category>> getAllVideos(
@@ -47,6 +50,14 @@ public class CategoryController {
     public ResponseEntity<Category> getVideoById(@PathVariable Long categoryId) {
         Category video = findCategoryByIdCase.execute(categoryId);
         return ResponseEntity.ok().body(video);
+    }
+
+    @GetMapping("{categoryId}/videos")
+    public ResponseEntity<Page<VideoByCategoryResponse>> getVideosByCategoryId(@PathVariable Long categoryId,
+                                                                               @RequestParam(defaultValue = "0") int page,
+                                                                               @RequestParam(defaultValue = "10") int size) {
+        Page<VideoByCategoryResponse> category = this.findVideoByCategoryIdCase.findVideoByCategoryIdCase(categoryId, page, size);
+        return ResponseEntity.ok().body(category);
     }
 
     @PostMapping

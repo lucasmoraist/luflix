@@ -26,6 +26,10 @@ public class VideoPersistence {
         return this.videoRepository.findAll();
     }
 
+    public List<VideoEntity> findByCategoryId(Long categoryId) {
+        return this.videoRepository.findByCategoryId(categoryId);
+    }
+
     public Optional<VideoEntity> findById(Long videoId) {
         return this.videoRepository.findById(videoId);
     }
