@@ -6,9 +6,12 @@ import com.lucasmoraist.luflix.application.usecases.videos.DeleteVideoCase;
 import com.lucasmoraist.luflix.application.usecases.videos.FindAllVideosCase;
 import com.lucasmoraist.luflix.application.usecases.videos.FindVideoByIdCase;
 import com.lucasmoraist.luflix.application.usecases.videos.UpdateVideoCase;
+import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.domain.model.Video;
+import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.video.FindAllVideoResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
@@ -50,10 +53,17 @@ class VideoControllerTest {
     @MockitoBean
     DeleteVideoCase deleteVideoCase;
 
+    Category defaultCategory;
+
+    @BeforeEach
+    void setUp() {
+        defaultCategory = new Category(1L, "Default", "Default category");
+    }
+
     @Test
     @DisplayName("Should return paginated list of videos when GET /api/v1/videos is called")
     void case01() throws Exception {
-        FindAllVideoResponse r = new FindAllVideoResponse(1L, "Title 1", "http://url");
+        FindAllVideoResponse r = new FindAllVideoResponse(1L, "Title 1", "http://url", defaultCategory);
         Page<FindAllVideoResponse> page = new PageImpl<>(List.of(r));
         when(findAllVideosCase.execute(0, 10)).thenReturn(page);
 
@@ -67,7 +77,7 @@ class VideoControllerTest {
     @Test
     @DisplayName("Should return video details when GET /api/v1/videos/{videoId} is called")
     void case02() throws Exception {
-        Video v = new Video(1L, "Title 1", "Description", "http://url");
+        Video v = new Video(1L, "Title 1", "Description", "http://url", defaultCategory);
         when(findVideoByIdCase.execute(1L)).thenReturn(v);
 
         mvc.perform(get("/api/v1/videos/{videoId}", 1L))
@@ -80,8 +90,9 @@ class VideoControllerTest {
     @Test
     @DisplayName("Should create a new video and return 201 with Location header when POST /api/v1/videos is called")
     void case03() throws Exception {
-        VideoRequest req = new VideoRequest("New title", "desc", "http://new");
-        Video created = new Video(42L, req.title(), req.description(), req.url());
+        CategoryRequest catReq = new CategoryRequest(defaultCategory.title(), defaultCategory.color());
+        VideoRequest req = new VideoRequest("New title", "desc", "http://new", catReq);
+        Video created = new Video(42L, req.title(), req.description(), req.url(), defaultCategory);
         when(createVideoCase.execute(ArgumentMatchers.any(VideoRequest.class))).thenReturn(created);
 
         mvc.perform(post("/api/v1/videos")
@@ -106,7 +117,8 @@ class VideoControllerTest {
     @Test
     @DisplayName("Should update an existing video and return 200 OK when PATCH /api/v1/videos/{videoId} is called")
     void case05() throws Exception {
-        VideoRequest req = new VideoRequest("Updated title", "desc", "http://updated");
+        CategoryRequest catReq = new CategoryRequest(defaultCategory.title(), defaultCategory.color());
+        VideoRequest req = new VideoRequest("Updated title", "desc", "http://updated", catReq);
         doNothing().when(updateVideoCase).execute(1L, req);
 
         mvc.perform(patch("/api/v1/videos/{videoId}", 1L)

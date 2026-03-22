@@ -35,7 +35,8 @@ class UpdateVideoCaseTest {
         VideoRequest videoRequest = new VideoRequest(
                 "New Title",
                 "New Description",
-                "http://example.com/new-video.mp4"
+                "http://example.com/new-video.mp4",
+                null
         );
         VideoEntity videoEntity = mock(VideoEntity.class);
 
@@ -55,7 +56,8 @@ class UpdateVideoCaseTest {
         VideoRequest videoRequest = new VideoRequest(
                 "New Title",
                 "New Description",
-                "http://example.com/new-video.mp4"
+                "http://example.com/new-video.mp4",
+                null
         );
 
         when(videoPersistence.findById(videoId)).thenReturn(Optional.empty());
