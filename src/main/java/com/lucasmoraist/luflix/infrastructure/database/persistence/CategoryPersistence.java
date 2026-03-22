@@ -43,4 +43,8 @@ public class CategoryPersistence {
         this.categoryRepository.save(categoryEntity);
     }
 
+    public Optional<CategoryEntity> findByTitle(String title) {
+        return this.categoryRepository.findByTitle(title);
+    }
+
 }
