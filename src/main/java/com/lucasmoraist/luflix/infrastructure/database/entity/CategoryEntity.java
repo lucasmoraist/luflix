@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.infrastructure.database.entity;
 
+import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,14 @@ public class CategoryEntity {
     public static CategoryEntity toEntity(CategoryRequest category) {
         return new CategoryEntity(
                 null,
+                category.title(),
+                category.color()
+        );
+    }
+
+    public static CategoryEntity toEntity(Category category) {
+        return new CategoryEntity(
+                category.id() != null ? category.id() : null,
                 category.title(),
                 category.color()
         );
