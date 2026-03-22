@@ -8,3 +8,9 @@ services:
       MYSQL_DATABASE: db_luflix
       MYSQL_USER: luflix_user
       MYSQL_PASSWORD: password
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+    driver: local
