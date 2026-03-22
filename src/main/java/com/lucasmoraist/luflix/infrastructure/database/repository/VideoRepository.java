@@ -15,5 +15,6 @@ public interface VideoRepository extends JpaRepository<VideoEntity, Long> {
             WHERE v.category.id = :categoryId
             """)
     List<VideoEntity> findByCategoryId(Long categoryId);
+    List<VideoEntity> findByTitleContainingIgnoreCase(String title);
 
 }

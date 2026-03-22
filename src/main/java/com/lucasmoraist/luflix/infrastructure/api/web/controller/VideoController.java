@@ -37,10 +37,11 @@ public class VideoController {
 
     @GetMapping
     public ResponseEntity<Page<FindAllVideoResponse>> getAllVideos(
+            @RequestParam(required = false, value = "search") String title,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        Page<FindAllVideoResponse> videos = findAllVideosCase.execute(page, size);
+        Page<FindAllVideoResponse> videos = findAllVideosCase.execute(title, page, size);
         return ResponseEntity.ok().body(videos);
     }
 

@@ -23,8 +23,10 @@ public class VideoPersistence {
         this.videoRepository.delete(videoEntity);
     }
 
-    public List<VideoEntity> findAll() {
-        return this.videoRepository.findAll();
+    public List<VideoEntity> findAll(String title) {
+        return title == null
+                ? this.videoRepository.findAll()
+                : this.videoRepository.findByTitleContainingIgnoreCase(title);
     }
 
     public List<VideoEntity> findByCategoryId(Long categoryId) {

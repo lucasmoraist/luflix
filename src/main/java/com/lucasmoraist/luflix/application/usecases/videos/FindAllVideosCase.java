@@ -22,9 +22,9 @@ public class FindAllVideosCase {
         this.videoPersistence = videoPersistence;
     }
 
-    public Page<FindAllVideoResponse> execute(int page, int size) {
+    public Page<FindAllVideoResponse> execute(String title, int page, int size) {
         log.debug("Find all videos with page {} and size {}", page, size);
-        List<VideoEntity> entities = this.videoPersistence.findAll();
+        List<VideoEntity> entities = this.videoPersistence.findAll(title);
         List<FindAllVideoResponse> videos = entities
                 .stream()
                 .map(VideoMapper::toResponse)
