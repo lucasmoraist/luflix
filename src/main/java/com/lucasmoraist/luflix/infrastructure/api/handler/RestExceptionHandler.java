@@ -1,8 +1,11 @@
 package com.lucasmoraist.luflix.infrastructure.api.handler;
 
+import com.lucasmoraist.luflix.domain.exceptions.JwtException;
+import com.lucasmoraist.luflix.domain.exceptions.UniqueException;
 import com.lucasmoraist.luflix.infrastructure.api.handler.dto.DataValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.security.auth.AuthenticationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,7 +26,13 @@ public class RestExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     protected ResponseEntity<Void> handleIllegalArgument(IllegalArgumentException ex) {
         logException("warn", ex.getMessage(), ex);
-        return ResponseEntity.internalServerError().build();
+        return ResponseEntity.badRequest().build();
+    }
+
+    @ExceptionHandler(UniqueException.class)
+    protected ResponseEntity<String> handleUniqueException(UniqueException ex) {
+        logException("warn", ex.getMessage(), ex);
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -34,6 +43,18 @@ public class RestExceptionHandler {
                 .toList();
         logException("warn", ex.getMessage(), ex);
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler({AuthenticationException.class})
+    protected ResponseEntity<Void> handleAuthenticationException(AuthenticationException ex) {
+        logException("warn", ex.getMessage(), ex);
+        return ResponseEntity.status(401).build();
+    }
+
+    @ExceptionHandler({JwtException.class})
+    protected ResponseEntity<Void> handleJwtException(JwtException ex) {
+        logException("warn", ex.getMessage(), ex);
+        return ResponseEntity.status(401).build();
     }
 
     @ExceptionHandler(Exception.class)

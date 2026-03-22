@@ -1,0 +1,9 @@
+package com.lucasmoraist.luflix.domain.exceptions;
+
+public class UniqueException extends RuntimeException {
+
+    public UniqueException(String message) {
+        super(message);
+    }
+
+}
