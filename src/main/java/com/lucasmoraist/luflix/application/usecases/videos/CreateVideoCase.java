@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.application.usecases.videos;
 
+import com.lucasmoraist.luflix.application.mapper.CategoryMapper;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.domain.model.Video;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
@@ -23,10 +24,10 @@ public class CreateVideoCase {
     public Video execute(VideoRequest request) {
         Category category = (request.category() == null)
                 ? this.categoryPersistence.findById(1L)
-                    .map(Category::toDomain)
+                    .map(CategoryMapper::toDomain)
                     .orElseThrow(() -> new IllegalArgumentException("Default category not found"))
                 : this.categoryPersistence.findByTitle(request.category().title())
-                    .map(Category::toDomain)
+                    .map(CategoryMapper::toDomain)
                     .orElseGet(() -> this.categoryPersistence.save(request.category()));
         log.debug("Category found or created with title: {}", category.title());
 

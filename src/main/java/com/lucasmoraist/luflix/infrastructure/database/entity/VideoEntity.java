@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.infrastructure.database.entity;
 
+import com.lucasmoraist.luflix.application.mapper.CategoryMapper;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,7 +38,7 @@ public class VideoEntity {
         if (request.title() != null) this.title = request.title();
         if (request.description() != null) this.description = request.description();
         if (request.url() != null) this.url = request.url();
-        if (request.category() != null) this.category = CategoryEntity.toEntity(request.category());
+        if (request.category() != null) this.category = CategoryMapper.toEntity(request.category());
     }
 
 }

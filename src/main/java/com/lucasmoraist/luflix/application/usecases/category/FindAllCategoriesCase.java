@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.application.usecases.category;
 
+import com.lucasmoraist.luflix.application.mapper.CategoryMapper;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.database.entity.CategoryEntity;
 import com.lucasmoraist.luflix.infrastructure.database.persistence.CategoryPersistence;
@@ -26,7 +27,7 @@ public class FindAllCategoriesCase {
         List<CategoryEntity> entities = this.categoryPersistence.findAll();
         List<Category> videos = entities
                 .stream()
-                .map(Category::toDomain)
+                .map(CategoryMapper::toDomain)
                 .toList();
 
         return new PageImpl<>(videos, PageRequest.of(page, size), entities.size());

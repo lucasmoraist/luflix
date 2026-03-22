@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.application.usecases.category;
 
+import com.lucasmoraist.luflix.application.mapper.CategoryMapper;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.database.persistence.CategoryPersistence;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +20,7 @@ public class FindCategoryByIdCase {
     public Category execute(Long videoId) {
         log.info("Finding category by id: {}", videoId);
         return categoryPersistence.findById(videoId)
-                .map(Category::toDomain)
+                .map(CategoryMapper::toDomain)
                 .orElseThrow(() -> {
                     log.error("Category not found with id: {}", videoId);
                     return new EntityNotFoundException("Category not found with id: " + videoId);

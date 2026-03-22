@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.infrastructure.database.persistence;
 
+import com.lucasmoraist.luflix.application.mapper.CategoryMapper;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
 import com.lucasmoraist.luflix.infrastructure.database.entity.CategoryEntity;
@@ -36,7 +37,7 @@ public class CategoryPersistence {
                 .color(request.color())
                 .build();
         CategoryEntity savedEntity = this.categoryRepository.save(entity);
-        return Category.toDomain(savedEntity);
+        return CategoryMapper.toDomain(savedEntity);
     }
 
     public void update(CategoryEntity categoryEntity) {

@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.application.usecases.category;
 
+import com.lucasmoraist.luflix.application.mapper.VideoMapper;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.category.VideoByCategoryResponse;
 import com.lucasmoraist.luflix.infrastructure.database.entity.VideoEntity;
 import com.lucasmoraist.luflix.infrastructure.database.persistence.VideoPersistence;
@@ -26,7 +27,7 @@ public class FindVideoByCategoryIdCase {
         List<VideoEntity> entities = this.videoPersistence.findByCategoryId(categoryId);
         List<VideoByCategoryResponse> videos = entities
                 .stream()
-                .map(VideoByCategoryResponse::toResponse)
+                .map(VideoMapper::fromVideoByCategoryResponse)
                 .toList();
 
         return new PageImpl<>(videos, PageRequest.of(page, size), entities.size());

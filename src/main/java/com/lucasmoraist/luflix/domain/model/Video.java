@@ -1,7 +1,5 @@
 package com.lucasmoraist.luflix.domain.model;
 
-import com.lucasmoraist.luflix.infrastructure.database.entity.VideoEntity;
-
 public record Video(
         Long id,
         String title,
@@ -9,17 +7,5 @@ public record Video(
         String url,
         Category category
 ) {
-
-    public static Video toDomain(VideoEntity videoEntity) {
-        return new Video(
-                videoEntity.getId(),
-                videoEntity.getTitle(),
-                videoEntity.getDescription(),
-                videoEntity.getUrl(),
-                videoEntity.getCategory() != null
-                        ? Category.toDomain(videoEntity.getCategory())
-                        : null
-        );
-    }
 
 }

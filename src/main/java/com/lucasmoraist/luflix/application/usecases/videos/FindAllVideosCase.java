@@ -1,5 +1,6 @@
 package com.lucasmoraist.luflix.application.usecases.videos;
 
+import com.lucasmoraist.luflix.application.mapper.VideoMapper;
 import com.lucasmoraist.luflix.infrastructure.database.entity.VideoEntity;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.video.FindAllVideoResponse;
 import com.lucasmoraist.luflix.infrastructure.database.persistence.VideoPersistence;
@@ -26,7 +27,7 @@ public class FindAllVideosCase {
         List<VideoEntity> entities = this.videoPersistence.findAll();
         List<FindAllVideoResponse> videos = entities
                 .stream()
-                .map(FindAllVideoResponse::toResponse)
+                .map(VideoMapper::toResponse)
                 .toList();
 
         return new PageImpl<>(videos, PageRequest.of(page, size), entities.size());
