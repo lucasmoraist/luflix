@@ -65,7 +65,7 @@ class VideoControllerTest {
     void case01() throws Exception {
         FindAllVideoResponse r = new FindAllVideoResponse(1L, "Title 1", "http://url", defaultCategory);
         Page<FindAllVideoResponse> page = new PageImpl<>(List.of(r));
-        when(findAllVideosCase.execute(0, 10)).thenReturn(page);
+        when(findAllVideosCase.execute("", 0, 10)).thenReturn(page);
 
         mvc.perform(get("/api/v1/videos").param("page", "0").param("size", "10"))
                 .andExpect(status().isOk())
