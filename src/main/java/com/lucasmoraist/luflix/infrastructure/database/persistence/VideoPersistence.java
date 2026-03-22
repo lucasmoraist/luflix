@@ -1,7 +1,7 @@
 package com.lucasmoraist.luflix.infrastructure.database.persistence;
 
 import com.lucasmoraist.luflix.domain.model.Video;
-import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
+import com.lucasmoraist.luflix.infrastructure.database.entity.CategoryEntity;
 import com.lucasmoraist.luflix.infrastructure.database.entity.VideoEntity;
 import com.lucasmoraist.luflix.infrastructure.database.repository.VideoRepository;
 import org.springframework.stereotype.Service;
@@ -34,11 +34,12 @@ public class VideoPersistence {
         return this.videoRepository.findById(videoId);
     }
 
-    public Video save(VideoRequest request) {
+    public Video save(Video video) {
         VideoEntity entity = VideoEntity.builder()
-                .title(request.title())
-                .description(request.description())
-                .url(request.url())
+                .title(video.title())
+                .description(video.description())
+                .url(video.url())
+                .category(CategoryEntity.toEntity(video.category()))
                 .build();
 
         VideoEntity savedEntity = this.videoRepository.save(entity);
