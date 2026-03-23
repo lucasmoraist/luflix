@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.3'
 	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+    id 'checkstyle'
 }
 
 group = 'com.lucasmoraist'
@@ -12,6 +14,12 @@ java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(21)
 	}
+}
+
+checkstyle {
+    toolVersion = '10.12.5'
+    ignoreFailures = false
+    maxWarnings = 0
 }
 
 configurations {
@@ -73,6 +81,34 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiVersion}"
 }
 
+bootJar {
+    layered {
+        enabled = true
+    }
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+	testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80
+            }
+        }
+    }
 }
