@@ -1,0 +1,400 @@
+{
+  "info": {
+    "_postman_id": "5ba0d078-3846-4c88-a9d4-5b902e4a4511",
+    "name": "luflix",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26335691"
+  },
+  "item": [
+    {
+      "name": "video",
+      "item": [
+        {
+          "name": "/api/v1/videos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdWZsaXgiLCJpYXQiOjE3NzQyMzMxNzgsImp0aSI6IjhkMDJhOTg1LTI3YmEtNDkwYi1hMjhlLTJhODUyODFjZDY2MiIsImF1ZCI6Imx1ZmxpeCIsInN1YiI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6MTc3NDI0MDM3OH0.ngQnsVv1eP0Dx97_9bopWFe9-xWic2qnXNLWKsUPMks",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/videos",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Teste",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/videos/{videoId}",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/videos/10",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos",
+                "10"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/videos/free",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/videos/free",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos",
+                "free"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/videos",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJsdWZsaXgiLCJpYXQiOjE3NzQyMzMxNzgsImp0aSI6IjhkMDJhOTg1LTI3YmEtNDkwYi1hMjhlLTJhODUyODFjZDY2MiIsImF1ZCI6Imx1ZmxpeCIsInN1YiI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoiVVNFUiIsImV4cCI6MTc3NDI0MDM3OH0.ngQnsVv1eP0Dx97_9bopWFe9-xWic2qnXNLWKsUPMks",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Teste\",\r\n    \"description\": \"A BONOXS é a melhor plataforma para você garantir seus gift cards do VALORANT e de qualquer outra plataforma ou jogo, utilize o cupom TCK5 para garantir 5% de desconto na sua PRIMEIRA COMPRA! https://bonoxs.com/br?utm_source=infl...\",\r\n    \"url\": \"https://www.youtube.com/watch?v=275Q4ileiB4\",\r\n    \"category\": {\r\n                \"title\": \"Valorant\",\r\n                \"color\": \"Red\"\r\n            }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/videos",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/videos/{videoId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category\": {\r\n        \"title\": \"Valorant\",\r\n        \"color\": \"Red\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/videos/1",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/videos/{videoId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/videos/2",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "videos",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "item": [
+        {
+          "name": "/api/v1/categories",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/categories",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/categories/{categoryId}",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/categories/1",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/categories/{categoryId}/videos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/categories/3/videos",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "3",
+                "videos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/categories",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Valorant\",\r\n    \"color\": \"Red\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/categories",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/categories/{categoriesId}",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"category\": {\r\n        \"title\": \"TCK\",\r\n        \"color\": \"blue\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/categories/1",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/api/v1/categories/{categoriesId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{local}}/api/v1/categories/1",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "/api/v1/users/register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"johndoe@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/users/register",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "authentication",
+      "item": [
+        {
+          "name": "/api/v1/auth/login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"johndoe@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{local}}/api/v1/auth/login",
+              "host": [
+                "{{local}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
