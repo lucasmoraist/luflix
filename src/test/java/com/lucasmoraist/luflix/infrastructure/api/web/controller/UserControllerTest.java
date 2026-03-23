@@ -5,10 +5,13 @@ import com.lucasmoraist.luflix.application.usecases.user.CreateUserCase;
 import com.lucasmoraist.luflix.domain.enums.Roles;
 import com.lucasmoraist.luflix.domain.model.User;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.UserRequest;
+import com.lucasmoraist.luflix.infrastructure.security.service.CustomUserDetailsService;
+import com.lucasmoraist.luflix.infrastructure.security.service.TokenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -20,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
 
     final ObjectMapper objectMapper = new ObjectMapper();
@@ -28,6 +32,10 @@ class UserControllerTest {
     MockMvc mvc;
     @MockitoBean
     CreateUserCase createUserCase;
+    @MockitoBean
+    CustomUserDetailsService customUserDetailsService;
+    @MockitoBean
+    TokenService tokenService;
 
     @Test
     @DisplayName("Should register a new user and return 201 with Location header when POST /api/v1/users/register is called")

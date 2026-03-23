@@ -10,10 +10,13 @@ import com.lucasmoraist.luflix.application.usecases.category.UpdateCategoryCase;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.category.VideoByCategoryResponse;
+import com.lucasmoraist.luflix.infrastructure.security.service.CustomUserDetailsService;
+import com.lucasmoraist.luflix.infrastructure.security.service.TokenService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -34,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = CategoryController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class CategoryControllerTest {
 
     final ObjectMapper objectMapper = new ObjectMapper();
@@ -52,6 +56,10 @@ class CategoryControllerTest {
     DeleteCategoryCase deleteCategoryCase;
     @MockitoBean
     FindVideoByCategoryIdCase findVideoByCategoryIdCase;
+    @MockitoBean
+    CustomUserDetailsService customUserDetailsService;
+    @MockitoBean
+    TokenService tokenService;
 
     @Test
     @DisplayName("Should return paginated list of categories when GET /api/v1/categories is called")
