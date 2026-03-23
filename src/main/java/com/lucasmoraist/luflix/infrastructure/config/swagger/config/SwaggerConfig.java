@@ -20,7 +20,7 @@ public class SwaggerConfig {
                         .version("1.0.0")
                         .description("API para gerenciamento de vídeos e categorias da plataforma Luflix")
                         .contact(new Contact()
-                                .name("Lucas Moraist")
+                                .name("lucasmoraist")
                                 .url("https://github.com/lucasmoraist")
                         )
                 )

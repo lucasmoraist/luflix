@@ -77,7 +77,7 @@ public interface VideoSwagger {
     @Operation(
             summary = "Listar vídeos gratuitos",
             description = "Retorna uma lista paginada de vídeos gratuitos disponíveis sem autenticação",
-            security = @SecurityRequirement(name = "")
+            security = @SecurityRequirement(name = "Bearer Authentication")
     )
     @ApiResponses(value = {
             @ApiResponse(
