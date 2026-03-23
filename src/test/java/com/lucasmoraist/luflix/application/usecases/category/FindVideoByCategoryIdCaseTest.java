@@ -1,4 +1,4 @@
-package com.lucasmoraist.luflix.application.usecases.videos;
+package com.lucasmoraist.luflix.application.usecases.category;
 
 import com.lucasmoraist.luflix.infrastructure.database.persistence.VideoPersistence;
 import org.junit.jupiter.api.DisplayName;
@@ -8,27 +8,27 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class FindAllVideosCaseTest {
+class FindVideoByCategoryIdCaseTest {
 
     @Mock
     VideoPersistence videoPersistence;
     @InjectMocks
-    FindAllVideosCase findAllVideosCase;
+    FindVideoByCategoryIdCase findVideoByCategoryIdCase;
 
     @Test
-    @DisplayName("Should find all videos with pagination")
+    @DisplayName("Should find videos by category id with pagination")
     void case01() {
+        Long categoryId = 1L;
         int page = 0;
         int size = 10;
 
-        findAllVideosCase.execute("", page, size);
+        findVideoByCategoryIdCase.findVideoByCategoryIdCase(categoryId, page, size);
 
-        verify(videoPersistence, times(1)).findAll(any());
+        verify(videoPersistence, times(1)).findByCategoryId(categoryId);
     }
 
 }

@@ -69,7 +69,7 @@ class VideoPersistenceTest {
         List<VideoEntity> entities = List.of(entity, entity2);
         when(videoRepository.findAll()).thenReturn(entities);
 
-        List<VideoEntity> result = videoPersistence.findAll();
+        List<VideoEntity> result = videoPersistence.findAll("");
 
         assertEquals(entities, result);
         verify(videoRepository, times(1)).findAll();
