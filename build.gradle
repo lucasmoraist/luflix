@@ -46,6 +46,7 @@ dependencies {
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation "com.auth0:java-jwt:${jwtVersion}"
+    testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
 
     // Database
 	runtimeOnly 'com.h2database:h2'
