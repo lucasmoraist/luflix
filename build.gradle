@@ -24,6 +24,11 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('jwtVersion', "4.5.1")
+	set('openApiVersion', "2.8.15")
+}
+
 dependencies {
     // Spring
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -40,7 +45,7 @@ dependencies {
 
     // Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'com.auth0:java-jwt:4.5.1'
+    implementation "com.auth0:java-jwt:${jwtVersion}"
 
     // Database
 	runtimeOnly 'com.h2database:h2'
@@ -59,6 +64,12 @@ dependencies {
 	// Validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
+
+	// Logging
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.4'
+
+    // OpenAPI
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiVersion}"
 }
 
 tasks.named('test') {
