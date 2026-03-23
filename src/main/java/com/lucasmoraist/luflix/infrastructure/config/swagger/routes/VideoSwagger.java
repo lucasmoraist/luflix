@@ -25,6 +25,7 @@ public interface VideoSwagger {
             summary = "Listar todos os vídeos",
             description = "Retorna uma lista paginada de todos os vídeos cadastrados, com opção de busca por título"
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -49,6 +50,7 @@ public interface VideoSwagger {
             summary = "Buscar vídeo por ID",
             description = "Retorna os detalhes de um vídeo específico pelo seu ID"
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -76,8 +78,7 @@ public interface VideoSwagger {
 
     @Operation(
             summary = "Listar vídeos gratuitos",
-            description = "Retorna uma lista paginada de vídeos gratuitos disponíveis sem autenticação",
-            security = @SecurityRequirement(name = "Bearer Authentication")
+            description = "Retorna uma lista paginada de vídeos gratuitos disponíveis sem autenticação"
     )
     @ApiResponses(value = {
             @ApiResponse(
@@ -96,6 +97,7 @@ public interface VideoSwagger {
             summary = "Criar novo vídeo",
             description = "Cria um novo vídeo com título, descrição, URL e categoria associada"
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -119,6 +121,7 @@ public interface VideoSwagger {
             summary = "Atualizar vídeo",
             description = "Atualiza os dados de um vídeo existente pelo seu ID"
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -146,6 +149,7 @@ public interface VideoSwagger {
             summary = "Deletar vídeo",
             description = "Remove um vídeo existente pelo seu ID"
     )
+    @SecurityRequirement(name = "Bearer Authentication")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "204",
