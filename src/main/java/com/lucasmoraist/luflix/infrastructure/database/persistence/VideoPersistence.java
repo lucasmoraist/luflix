@@ -24,7 +24,7 @@ public class VideoPersistence {
     }
 
     public List<VideoEntity> findAll(String title) {
-        return title == null
+        return title == null || title.isBlank()
                 ? this.videoRepository.findAll()
                 : this.videoRepository.findByTitleContainingIgnoreCase(title);
     }
