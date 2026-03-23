@@ -3,6 +3,7 @@ package com.lucasmoraist.luflix.infrastructure.api.web.controller;
 import com.lucasmoraist.luflix.application.usecases.user.CreateUserCase;
 import com.lucasmoraist.luflix.domain.model.User;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.UserRequest;
+import com.lucasmoraist.luflix.infrastructure.config.swagger.routes.UserSwagger;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController implements UserSwagger {
 
     private final CreateUserCase createUserCase;
 

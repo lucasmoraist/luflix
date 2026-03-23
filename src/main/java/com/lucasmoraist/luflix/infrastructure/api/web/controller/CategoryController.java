@@ -9,6 +9,7 @@ import com.lucasmoraist.luflix.application.usecases.category.UpdateCategoryCase;
 import com.lucasmoraist.luflix.domain.model.Category;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.CategoryRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.category.VideoByCategoryResponse;
+import com.lucasmoraist.luflix.infrastructure.config.swagger.routes.CategorySwagger;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/categories")
-public class CategoryController {
+public class CategoryController implements CategorySwagger {
 
     private final FindAllCategoriesCase findAllCategoriesCase;
     private final FindCategoryByIdCase findCategoryByIdCase;

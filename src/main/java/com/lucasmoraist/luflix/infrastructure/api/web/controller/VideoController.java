@@ -9,6 +9,7 @@ import com.lucasmoraist.luflix.application.usecases.videos.UpdateVideoCase;
 import com.lucasmoraist.luflix.domain.model.Video;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.VideoRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.video.FindAllVideoResponse;
+import com.lucasmoraist.luflix.infrastructure.config.swagger.routes.VideoSwagger;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,7 @@ import java.net.URI;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/videos")
-public class VideoController {
+public class VideoController implements VideoSwagger {
 
     private final FindAllVideosCase findAllVideosCase;
     private final FindVideoByIdCase findVideoByIdCase;

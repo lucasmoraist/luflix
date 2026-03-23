@@ -3,6 +3,7 @@ package com.lucasmoraist.luflix.infrastructure.api.web.controller;
 import com.lucasmoraist.luflix.application.usecases.auth.AuthenticationCase;
 import com.lucasmoraist.luflix.infrastructure.api.web.request.AuthenticationRequest;
 import com.lucasmoraist.luflix.infrastructure.api.web.response.token.TokenDTO;
+import com.lucasmoraist.luflix.infrastructure.config.swagger.routes.AuthenticationSwagger;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/auth")
-public class AuthenticationController {
+public class AuthenticationController implements AuthenticationSwagger {
 
     @Value("${spring.security.jwt.expiration-hours}")
     private Integer expirationHours;
