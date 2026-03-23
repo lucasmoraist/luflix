@@ -3,6 +3,7 @@ package com.lucasmoraist.luflix.infrastructure.api.web.controller;
 import com.lucasmoraist.luflix.application.usecases.videos.CreateVideoCase;
 import com.lucasmoraist.luflix.application.usecases.videos.DeleteVideoCase;
 import com.lucasmoraist.luflix.application.usecases.videos.FindAllVideosCase;
+import com.lucasmoraist.luflix.application.usecases.videos.FindAllVideosFreeCase;
 import com.lucasmoraist.luflix.application.usecases.videos.FindVideoByIdCase;
 import com.lucasmoraist.luflix.application.usecases.videos.UpdateVideoCase;
 import com.lucasmoraist.luflix.domain.model.Video;
@@ -34,6 +35,7 @@ public class VideoController {
     private final CreateVideoCase createVideoCase;
     private final UpdateVideoCase updateVideoCase;
     private final DeleteVideoCase deleteVideoCase;
+    private final FindAllVideosFreeCase findAllVideosFreeCase;
 
     @GetMapping
     public ResponseEntity<Page<FindAllVideoResponse>> getAllVideos(
@@ -49,6 +51,15 @@ public class VideoController {
     public ResponseEntity<Video> getVideoById(@PathVariable Long videoId) {
         Video video = findVideoByIdCase.execute(videoId);
         return ResponseEntity.ok().body(video);
+    }
+
+    @GetMapping("/free")
+    public ResponseEntity<Page<FindAllVideoResponse>> getAllVideosFree(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<FindAllVideoResponse> videos = findAllVideosFreeCase.execute(page, size);
+        return ResponseEntity.ok().body(videos);
     }
 
     @PostMapping
